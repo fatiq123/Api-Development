@@ -35,3 +35,21 @@ app.post('/api/add_product', (req, res) => {
         "product": pdata
     });
 });
+
+
+// get api
+app.get('/api/get_product', (req, res) => {
+
+    // if there is already data in list then simply return
+    if (productData.length > 0) {
+        res.status(200).send({
+            "status_code": 200,
+            "products": productData
+        });
+    } else {
+        res.status(200).send({
+            "status_code": 200,
+            "products": [] // in case if there is no data in list 
+        });
+    }
+});
