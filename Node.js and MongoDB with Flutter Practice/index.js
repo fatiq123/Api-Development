@@ -53,3 +53,57 @@ app.get('/api/get_product', (req, res) => {
         });
     }
 });
+
+
+// put api
+app.post('/api/update_product/:id', (req, res) => {
+
+    let id = req.params.id * 1;     // 1 is added to convert string to int and also remember const {id} = parseInt(req.params.id)
+    let productToUpdate = productData.find((product) => product.id === id);
+    let index = productData.indexOf(productToUpdate);
+
+    productData[index] = req.body;
+
+    res.status(200).send({
+        "status_code": 200,
+        "message": "product updated",
+    });
+
+});
+
+
+// // delete api
+// app.post('/api/delete_product/:id', (req, res) => {
+
+//     let id = req.params.id * 1;     // 1 is added to convert string to int and also remember const {id} = parseInt(req.params.id)
+//     let productToUpdate = productData.find((product) => product.id === id);
+//     let index = productData.indexOf(productToUpdate);
+
+//     productData.slice(index, 1);    // 1 means i want one record to delete
+
+//     res.status(204).send({
+//         "status_code": "success",
+//         "message": "product deleted",
+//     })
+// });
+
+app.post('/api/delete_product/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const productToUpdate = productData.find((product) => product.id === id);
+    const index = productData.indexOf(productToUpdate);
+  
+    if (index !== -1) {
+      productData.splice(index, 1); // Use 'splice' to remove an item
+  
+      res.status(204).send({
+        status_code: 'success',
+        message: 'Product deleted',
+      });
+    } else {
+      res.status(404).send({
+        status_code: 'error',
+        message: 'Product not found',
+      });
+    }
+  });
+  
