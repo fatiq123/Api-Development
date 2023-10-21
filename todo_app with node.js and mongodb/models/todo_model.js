@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const toDoSchema = new Schema({
-    userId:{
+    userId: {
         type: Schema.Types.ObjectId,
         ref: UserModel.modelName
     },
@@ -16,7 +16,7 @@ const toDoSchema = new Schema({
         type: String,
         required: true
     },
-},{timestamps:true});
+}, { timestamps: true });
 
-const ToDoModel = db.model('todo',toDoSchema);
+const ToDoModel = db.model('todo', toDoSchema);
 module.exports = ToDoModel;

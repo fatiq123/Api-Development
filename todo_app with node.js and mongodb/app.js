@@ -6,7 +6,7 @@ const app = express();
 
 app.use(bodyParser.json())
 
-app.use("/",UserRoute);
-app.use("/",ToDoRoute);
+app.use("/", UserRoute);
+app.use("/", ToDoRoute);
 
 module.exports = app;
