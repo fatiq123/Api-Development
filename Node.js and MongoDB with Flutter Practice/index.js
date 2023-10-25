@@ -111,50 +111,105 @@ db.once("open", () => {
         // }
     });
 
+    ///------------------------------------------------update
+    // // put api
+    // app.post('/api/update_product/:id', async (req, res) => {
 
-    // put api
-    app.post('/api/update_product/:id', async (req, res) => {
 
+    //     let id = req.params.id;
+    //     let updatedData = req.body;
 
-        let id = req.params.id;
-        let updatedData = req.body;
+    //     try {
+    //         const data = await Product.findByIdAndUpdate(id, updatedData, { new: true });
+    //         res.status(200).json(data);
+    //     } catch (error) {
+    //         res.status(400).json(error.message);
+    //     }
+
+    //     // let id = req.params.id * 1;     // 1 is added to convert string to int and also remember const {id} = parseInt(req.params.id)
+    //     // let productToUpdate = productData.find((product) => product.id === id);
+    //     // let index = productData.indexOf(productToUpdate);
+
+    //     // productData[index] = req.body;
+
+    //     // res.status(200).send({
+    //     //     "status_code": 200,
+    //     //     "message": "product updated",
+    //     // });
+
+    // });
+
+    // Updated put API for updating a product
+    app.put('/api/update_product/:id', async (req, res) => {
+        const id = req.params.id;
+        const updatedData = {
+            pname: req.body.pname,
+            pprice: req.body.pprice,
+            pdescription: req.body.pdescription,
+        };
+
+        console.log('Received request to update product with ID:', id);
+        console.log('Received data:', updatedData);
 
         try {
-            const data = await Product.findByIdAndUpdate(id, updatedData);
+            const data = await Product.findByIdAndUpdate(id, updatedData, { new: true });
             res.status(200).json(data);
         } catch (error) {
-            res.status(400).json(error.message);
+            res.status(400).json({ message: error.message });
         }
-
-        // let id = req.params.id * 1;     // 1 is added to convert string to int and also remember const {id} = parseInt(req.params.id)
-        // let productToUpdate = productData.find((product) => product.id === id);
-        // let index = productData.indexOf(productToUpdate);
-
-        // productData[index] = req.body;
-
-        // res.status(200).send({
-        //     "status_code": 200,
-        //     "message": "product updated",
-        // });
-
     });
 
-    // delete api
+
+
+
+    //----------------------------------------------------------delete
+
+    // // delete api
+    // app.delete('/api/delete_product/:id', async (req, res) => {
+
+    //     let id = req.params.id;
+
+    //     try {
+    //         let data = await Product.findByIdAndDelete(id);
+    //         res.status(200).json({
+    //             'status': `deleted the product ${data.pname} from database`
+    //         });
+    //     } catch (error) {
+    //         res.status(400).json(error.message);
+    //     }
+
+
     app.delete('/api/delete_product/:id', async (req, res) => {
-
-        let id = req.params.id;
-
+        const id = req.params.id;
+      
         try {
-            let data = await Product.findByIdAndDelete(id);
-            res.status(200).json({
-                'status': `deleted the product ${data.pname} from database`
-            });
+          const data = await Product.findByIdAndDelete(id);
+          if (!data) {
+            res.status(404).json({ message: `Product with ID ${id} not found` });
+          } else {
+            res.status(200).json({ message: `Deleted the product ${data.pname} from the database` });
+          }
         } catch (error) {
-            res.status(400).json(error.message);
+          res.status(400).json({ message: error.message });
         }
 
+      
 
-        // const id = parseInt(req.params.id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // const id = parseInt(req.params.id);
         // const productToUpdate = productData.find((product) => product.id === id);
         // const index = productData.indexOf(productToUpdate);
 
