@@ -5,7 +5,7 @@
 Clone the project
 
 ```bash
-  git clone [https://link-to-project](https://github.com/fatiq123/Api-Development.git)
+  git clone https://github.com/fatiq123/Api-Development.git
 ```
 
 Go to the project directory
